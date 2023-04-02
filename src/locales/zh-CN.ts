@@ -25,7 +25,7 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
-    unauthorizedTips: '未经授权，请先进行验证。',
+    unauthorizedTips: '加入qq群573960837获取验证码。',
   },
   chat: {
     newChatButton: '新建聊天',
