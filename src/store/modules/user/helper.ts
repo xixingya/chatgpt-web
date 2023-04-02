@@ -16,8 +16,8 @@ export function defaultSetting(): UserState {
   return {
     userInfo: {
       avatar: 'https://raw.githubusercontent.com/Chanzhaoyu/chatgpt-web/main/src/assets/avatar.jpg',
-      name: 'xixingya',
-      description: 'Open AI <a href="https://openai.com" class="text-blue-500" target="_blank" >OpenAI</a>',
+      name: '合作商 pockethub',
+      description: 'pockethub <a href="https://pockethub.cn" class="text-blue-500" target="_blank" >PocketHub</a>',
     },
   }
 }
