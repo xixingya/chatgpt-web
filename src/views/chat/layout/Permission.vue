@@ -57,7 +57,7 @@ function handlePress(event: KeyboardEvent) {
       <div class="space-y-4">
         <header class="space-y-2">
           <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-neutral-200">
-            403
+            赞助商 pockethub.cn 由于使用人数过多，请加群获取验证码
           </h2>
           <p class="text-base text-center text-slate-500 dark:text-slate-500">
             {{ $t('common.unauthorizedTips') }}
