@@ -84,11 +84,10 @@ router.post('/verify', async (req, res) => {
 
 router.get('/add_key', async (req, res) => {
   try {
-    const token = req.query.token
     const password = req.query.password
     const adminPassword = process.env.ADMIN_PASSWORD
     const queryCount = req.query.queryCount == null ? 1 : req.query.queryCount
-    let generateCount = req.query.generateCount as any
+    let generateCount = req.query.generateCount == null ? 1 : req.query.generateCount
     generateCount = generateCount >= 100 ? 100 : generateCount
     const time = req.query.dayTime == null ? 30 : req.query.dayTime
     if (password !== adminPassword)
