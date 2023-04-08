@@ -65,7 +65,7 @@ const getAuthCount = async (key) => {
 
 const addNewKey = async (count, time) => {
   const key = generateRandomString(10)
-  await redisClient.set(AUTH_PERFIX + key, count, 'EX', time * 60 * 24)
+  await redisClient.set(AUTH_PERFIX + key, count, 'EX', time * 60 * 60 * 24)
   return key
 }
 const decrKey = async (key) => {
