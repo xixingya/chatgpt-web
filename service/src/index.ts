@@ -4,7 +4,7 @@ import type { ChatMessage } from './chatgpt'
 import { chatConfig, chatReplyProcess, currentModel } from './chatgpt'
 import { auth } from './middleware/auth'
 import { limiter } from './middleware/limiter'
-import { isNotEmptyString } from './utils/is'
+import { addNewKey, getAuthCount } from './db/redis'
 
 const app = express()
 const router = express.Router()
@@ -47,7 +47,7 @@ router.post('/chat-process', [auth, limiter], async (req, res) => {
 
 router.post('/config', auth, async (req, res) => {
   try {
-    const response = await chatConfig()
+    const response = await chatConfig(req)
     res.send(response)
   }
   catch (error) {
@@ -57,8 +57,8 @@ router.post('/config', auth, async (req, res) => {
 
 router.post('/session', async (req, res) => {
   try {
-    const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
-    const hasAuth = isNotEmptyString(AUTH_SECRET_KEY)
+    // const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
+    const hasAuth = true
     res.send({ status: 'Success', message: '', data: { auth: hasAuth, model: currentModel() } })
   }
   catch (error) {
@@ -71,11 +71,34 @@ router.post('/verify', async (req, res) => {
     const { token } = req.body as { token: string }
     if (!token)
       throw new Error('Secret key is empty')
-
-    if (process.env.AUTH_SECRET_KEY !== token)
+    const count = await getAuthCount(token)
+    if (count <= 0)
       throw new Error('密钥无效 | Secret key is invalid')
 
     res.send({ status: 'Success', message: 'Verify successfully', data: null })
+  }
+  catch (error) {
+    res.send({ status: 'Fail', message: error.message, data: null })
+  }
+})
+
+router.get('/add_key', async (req, res) => {
+  try {
+    const token = req.query.token
+    const password = req.query.password
+    const adminPassword = process.env.ADMIN_PASSWORD
+    const queryCount = req.query.queryCount == null ? 1 : req.query.queryCount
+    let generateCount = req.query.generateCount as any
+    generateCount = generateCount >= 100 ? 100 : generateCount
+    const time = req.query.dayTime == null ? 30 : req.query.dayTime
+    if (password !== adminPassword)
+      throw new Error('密码错误')
+    let keys = ''
+    for (let i = 0; i < generateCount; i++) {
+      const key = await addNewKey(queryCount, time)
+      keys = `${keys + key}\n`
+    }
+    res.send({ status: 'Success', message: `生成key成功,key是 ${keys}`, data: null })
   }
   catch (error) {
     res.send({ status: 'Fail', message: error.message, data: null })

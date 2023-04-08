@@ -8,6 +8,7 @@ import fetch from 'node-fetch'
 import { sendResponse } from '../utils'
 import { isNotEmptyString } from '../utils/is'
 import type { ApiModel, ChatContext, ChatGPTUnofficialProxyAPIOptions, ModelConfig } from '../types'
+import { getAuthCount } from '../db/redis'
 import type { RequestOptions, SetProxyOptions, UsageResponse } from './types'
 
 const { HttpsProxyAgent } = httpsProxyAgent
@@ -176,8 +177,10 @@ function formatDate(): string[] {
   return [formattedFirstDay, formattedLastDay]
 }
 
-async function chatConfig() {
-  const usage = await fetchUsage()
+async function chatConfig(req) {
+  const Authorization = req.header('Authorization')
+  const key = Authorization.replace('Bearer ', '').trim()
+  const usage = await getAuthCount(key) as any
   const reverseProxy = process.env.API_REVERSE_PROXY ?? '-'
   const httpsProxy = (process.env.HTTPS_PROXY || process.env.ALL_PROXY) ?? '-'
   const socksProxy = (process.env.SOCKS_PROXY_HOST && process.env.SOCKS_PROXY_PORT)
