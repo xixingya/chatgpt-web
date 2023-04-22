@@ -62,7 +62,9 @@ function handlePress(event: KeyboardEvent) {
           <p class="text-base text-center text-slate-500 dark:text-slate-500">
             {{ $t('common.unauthorizedTips') }}
           </p>
-          <div><a style="font-size: large" href="https://zoufk.top/links/EE1293DF">或者点击这里直接获取</a></div>
+          <div style="text-align: center">
+            <a style="font-size: large;text-align: center" href="https://zoufk.top/links/EE1293DF">或者点击这里直接获取</a>
+          </div>
           <Icon403 class="w-[200px] m-auto" />
         </header>
         <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
