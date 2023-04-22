@@ -43,6 +43,10 @@ async function handleVerify() {
   }
 }
 
+function gotoGet() {
+  window.open('https://zoufk.top/links/EE1293DF', '_blank')
+}
+
 function handlePress(event: KeyboardEvent) {
   if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault()
@@ -66,6 +70,7 @@ function handlePress(event: KeyboardEvent) {
           <NButton
             href="https://zoufk.top/links/EE1293DF"
             type="primary"
+            @on-click="gotoGet"
           >
             或者点击这里直接获取
           </NButton>
