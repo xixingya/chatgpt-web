@@ -67,13 +67,13 @@ function handlePress(event: KeyboardEvent) {
             {{ $t('common.unauthorizedTips') }}
           </p>
 
-          <NButton
-            block
-            type="primary"
-            @click="gotoGet"
-          >
-            或者点击这里直接获取
-          </NButton>
+          <!--          <NButton -->
+          <!--            block -->
+          <!--            type="primary" -->
+          <!--            @click="gotoGet" -->
+          <!--          > -->
+          <!--            或者点击这里直接获取 -->
+          <!--          </NButton> -->
           <Icon403 class="w-[200px] m-auto" />
         </header>
         <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
