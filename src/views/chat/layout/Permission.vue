@@ -64,11 +64,8 @@ function handlePress(event: KeyboardEvent) {
           </p>
 
           <NButton
-            block
             href="https://zoufk.top/links/EE1293DF"
             type="primary"
-            :loading="loading"
-            @click="handleVerify"
           >
             或者点击这里直接获取
           </NButton>
