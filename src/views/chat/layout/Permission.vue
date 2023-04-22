@@ -69,7 +69,6 @@ function handlePress(event: KeyboardEvent) {
 
           <NButton
             block
-            href="https://zoufk.top/links/EE1293DF"
             type="primary"
             @on-click="gotoGet"
           >
