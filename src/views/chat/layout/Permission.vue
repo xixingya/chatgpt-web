@@ -43,9 +43,9 @@ async function handleVerify() {
   }
 }
 
-function gotoGet() {
-  window.open('https://zoufk.top/links/EE1293DF', '_blank')
-}
+// function gotoGet() {
+//   window.open('https://zoufk.top/links/EE1293DF', '_blank')
+// }
 
 function handlePress(event: KeyboardEvent) {
   if (event.key === 'Enter' && !event.shiftKey) {
