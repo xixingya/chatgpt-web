@@ -67,7 +67,6 @@ function handlePress(event: KeyboardEvent) {
             block
             href="https://zoufk.top/links/EE1293DF"
             type="primary"
-            :disabled="disabled"
             :loading="loading"
             @click="handleVerify"
           >
