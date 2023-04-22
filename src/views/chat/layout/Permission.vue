@@ -70,7 +70,7 @@ function handlePress(event: KeyboardEvent) {
           <NButton
             block
             type="primary"
-            @on-click="gotoGet"
+            @click="gotoGet"
           >
             或者点击这里直接获取
           </NButton>
